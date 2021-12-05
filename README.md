@@ -4,9 +4,14 @@ This repository is for EE543 Neural Network Project process.
 ## Group Members:
 Arnisa Fazla, Ceyhun Yorulmaz, Mehran Hosseini, Oğuzhan Özçelik.
 
+## Deadlines:
+Some important deadlines may be added here.
+
 ## Guidelines:
+
 ### Github is integrable to Google Colab see: 
   https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb
+
 ### Keras documents: 
   https://docs.truba.gov.tr/education/keras/build/data_load_preprocess.html
   https://docs.truba.gov.tr/education/keras/build/build_model.html
