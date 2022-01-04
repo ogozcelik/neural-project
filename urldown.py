@@ -11,4 +11,5 @@ for i in train_url:
   image = img.resize((80, 80))
   image_sequence = image.getdata()
   image_array = np.array(image_sequence)
+  image_array = np.reshape(image_array,(80,80,3))
   urllist.append(image_array)
