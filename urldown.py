@@ -8,6 +8,7 @@ for i in train_url:
   except:
       pass
   img = Image.open("gfg.jpg")
-  image_sequence = img.getdata()
+  image = img.resize((80, 80))
+  image_sequence = image.getdata()
   image_array = np.array(image_sequence)
   urllist.append(image_array)
