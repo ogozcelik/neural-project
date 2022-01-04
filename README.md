@@ -6,6 +6,7 @@ Arnisa Fazla, Ceyhun Yorulmaz, Mehran Hosseini, Oğuzhan Özçelik.
 
 ## Deadlines:
 Some important deadlines may be added here.
+January,7 22
 
 ## Guidelines:
 
