@@ -36,26 +36,29 @@ Test your final trained model/models on the testing data (eee443_project_dataset
 import h5py
 import numpy as np
 from urllib import error
+from tqdm import tqdm
+import requests
+import multiprocessing as mp
 
-"""with h5py.File('eee443_project_dataset_train.h5', 'r') as f:
+with h5py.File('eee443_project_dataset_train.h5', 'r') as f:
     # List all groups
-    # print("Keys: %s" % f.keys())
-    train_cap = list(f.keys())[0]
-    train_imid = list(f.keys())[1]
-    train_ims = list(f.keys())[2]
+    print("Keys: %s" % f.keys())
+    #train_cap = list(f.keys())[0]
+    #train_imid = list(f.keys())[1]
+    #train_ims = list(f.keys())[2]
     train_url = list(f.keys())[3]
-    word_code = list(f.keys())[4]
+    #word_code = list(f.keys())[4]
     # get the data
-    train_cap = list(f[train_cap])  # images
-    train_imid = list(f[train_imid])
-    train_ims = list(f[train_ims])
+    #train_cap = list(f[train_cap])  # images
+    #train_imid = list(f[train_imid])
+    #train_ims = list(f[train_ims])
     train_url = list(f[train_url])
-    word_code = list(f[word_code])
+    #word_code = list(f[word_code])
 
-    train_cap = np.array(train_cap)
-    train_imid = np.array(train_imid)
-    train_ims = np.array(train_ims)
-    word_code = np.array(word_code)"""
+    #train_cap = np.array(train_cap)
+    #train_imid = np.array(train_imid)
+    #train_ims = np.array(train_ims)
+    #word_code = np.array(word_code)
 
 with h5py.File('eee443_project_dataset_test.h5', 'r') as f:
     # List all groups
@@ -65,19 +68,17 @@ with h5py.File('eee443_project_dataset_test.h5', 'r') as f:
     test_url = list(f[test_url])
 
 
-from tqdm import tqdm
-import requests
-import multiprocessing as mp
+cpu = mp.cpu_count()
+print("Number of cpu : ",cpu )
 
-print("Number of cpu : ", mp.cpu_count())
+# change train_url to test url to download test images
 
-
-def my_func(caption):
+def my_func(caption): 
     url = train_url[caption].decode("utf-8")
     res = requests.get(url)
 
     if res.ok:
-        file = open("test_images/" + str(caption) + ".jpg", "wb")
+        file = open("images/" + str(caption) + ".jpg", "wb")
         file.write(res.content)
         file.close()
     else:
@@ -86,14 +87,16 @@ def my_func(caption):
 
 
 def main():
-    pool = mp.Pool(7)
-    for _ in tqdm(pool.imap_unordered(my_func, range(len(train_url))), total=len(train_url)-71706):
+    pool = mp.Pool(cpu-1)
+    for _ in tqdm(pool.imap_unordered(my_func, range(len(train_url))), total=len(train_url)):
         pass
 
 
 if __name__ == "__main__":
     main()
 
+    
+# OLD CODES BELOW
 # train_images = np.zeros((80, 80, 3), dtype=np.short)
 
 """train_captions = []
